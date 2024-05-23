@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+
+import { getImageImport } from "@/lib/get-image-import";
+
+interface Props {
+	logo: string;
+	label: string;
+	href: string;
+}
+
+const { logo, label, href } = Astro.props;
+---
+
+<div class="grid grid-cols-[120px_1fr] items-center gap-x-4">
+	<Image alt="" class="max-h-20 object-contain" src={getImageImport(logo)} />
+	<div>
+		<a href={href}>{label}</a>
+	</div>
+</div>

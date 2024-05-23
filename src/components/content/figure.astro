@@ -1,0 +1,17 @@
+---
+import Img from "@/components/content/img.astro";
+
+interface Props {
+	alt?: string;
+	href: string;
+}
+
+const { alt = "", href } = Astro.props;
+---
+
+<figure>
+	<Img alt={alt} src={href} />
+	<figcaption>
+		<slot />
+	</figcaption>
+</figure>

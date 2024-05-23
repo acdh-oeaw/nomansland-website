@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "title": "Nomads' Manuscripts Landscape",
+    "image": "/assets/content/index-page/hero/image.jpg",
+    "leadIn": "Investigating Literary Evidence for Transculturation in Medieval Iran and Central Asia in the 13th – 15th centuries.",
+    "links": [
+      {
+        "label": "Read more",
+        "href": "/about/"
+      }
+    ]
+  },
+  "main": {
+    "sections": [
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "About the Project",
+          "variant": "fluid",
+          "cards": [
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "About",
+                "reference": "about"
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Project Team",
+                "reference": "project-team"
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Publications",
+                "reference": "publications"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

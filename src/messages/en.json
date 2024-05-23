@@ -1,0 +1,54 @@
+{
+	"ImprintPage": {
+		"meta": {
+			"title": "Imprint"
+		},
+		"title": "Imprint"
+	},
+	"IndexPage": {
+		"card": {
+			"no-summary": "No summary available",
+			"read-more": "Read more"
+		},
+		"meta": {
+			"title": "Home"
+		}
+	},
+	"Mdx": {
+		"FootnoteBackLabel": "Back to reference {reference}",
+		"Footnotes": "Footnotes"
+	},
+	"MobileNavToggle": {
+		"label": "Toggle navigation menu"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Page not found"
+		},
+		"title": "Page not found"
+	},
+	"Search": {
+		"close-dialog": "Close dialog",
+		"search": "Search"
+	},
+	"SkipLink": {
+		"skip-to-main-content": "Skip to main content"
+	},
+	"TableOfContents": {
+		"tableOfContents": "Table of contents"
+	},
+	"WebsiteFooter": {
+		"contact": "Contact",
+		"helpdesk": "Helpdesk",
+		"helpdesk-message": "ACDH-CH runs a helpdesk offering advice for questions related to various digital humanities topics.",
+		"links": {
+			"imprint": "Imprint"
+		}
+	},
+	"WebsiteHeader": {
+		"links": {
+			"home": "Home"
+		},
+		"navigation-primary": "Primary"
+	}
+}

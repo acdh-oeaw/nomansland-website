@@ -1,0 +1,61 @@
+{
+  "links": [
+    {
+      "discriminant": "page",
+      "value": {
+        "label": "About",
+        "reference": "about"
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Team",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Project Team",
+              "reference": "project-team"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Advisory Committee",
+              "reference": "advisory-committee"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "page",
+      "value": {
+        "label": "Events",
+        "reference": "events"
+      }
+    },
+    {
+      "discriminant": "page",
+      "value": {
+        "label": "Project partners",
+        "reference": "project-partners"
+      }
+    },
+    {
+      "discriminant": "page",
+      "value": {
+        "label": "Publications",
+        "reference": "publications"
+      }
+    },
+    {
+      "discriminant": "page",
+      "value": {
+        "label": "Database",
+        "reference": "database"
+      }
+    }
+  ]
+}

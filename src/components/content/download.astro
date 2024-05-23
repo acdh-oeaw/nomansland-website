@@ -1,0 +1,13 @@
+---
+import { withBasePath } from "@/lib/with-base-path";
+
+interface Props {
+	href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a download href={withBasePath(href)}>
+	<slot />
+</a>
