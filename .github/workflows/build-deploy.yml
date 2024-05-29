@@ -60,6 +60,8 @@ jobs:
   build:
     name: Build and push docker image
     needs: [env, vars]
+    environment:
+      name: "${{ needs.env.outputs.environment }}"
     runs-on: ubuntu-latest
     permissions:
       contents: read
