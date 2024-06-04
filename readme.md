@@ -1,6 +1,7 @@
 # nomansland website
 
-website for the "nomads' manuscripts landscape" (nomansland) project.
+website for the "nomads' manuscripts landscape" (nomansland) project. deployed at
+<https://www.oeaw.ac.at/iran/nomansland/>.
 
 ## how to run
 
