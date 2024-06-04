@@ -7,8 +7,6 @@ import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import { loadEnv } from "vite";
 
-import { ensureTrailingSlash } from "./src/lib/ensure-trailing-slash";
-
 // import { defaultLocale } from "./src/config/i18n.config";
 // import { createConfig as createMdxConfig } from "./src/config/mdx.config";
 
@@ -66,20 +64,13 @@ export default defineConfig({
 	},
 	redirects: {
 		"/admin": {
-			destination: env.PUBLIC_APP_BASE_PATH
-				? `${ensureTrailingSlash(env.PUBLIC_APP_BASE_PATH)}keystatic`
-				: "/keystatic",
+			destination: "/iran/nomansland/keystatic",
 			status: 307,
 		},
-		/** https://github.com/Thinkmill/keystatic/issues/1170 */
-		...(env.PUBLIC_APP_BASE_PATH
-			? {
-					"/api/[...id]": {
-						destination: `${ensureTrailingSlash(env.PUBLIC_APP_BASE_PATH)}api/[...id]`,
-						status: 307,
-					},
-				}
-			: {}),
+		"/api/[...id]": {
+			destination: "/iran/nomansland/api/[...id]",
+			status: 307,
+		},
 	},
 	scopedStyleStrategy: "where",
 	security: {
