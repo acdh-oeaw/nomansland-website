@@ -9,6 +9,7 @@ import { loadEnv } from "vite";
 
 // import { defaultLocale } from "./src/config/i18n.config";
 // import { createConfig as createMdxConfig } from "./src/config/mdx.config";
+import { ensureTrailingSlash } from "./src/lib/ensure-trailing-slash";
 
 const env = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
@@ -64,11 +65,9 @@ export default defineConfig({
 	},
 	redirects: {
 		"/admin": {
-			destination: "/iran/nomansland/keystatic",
-			status: 307,
-		},
-		"/api/[...id]": {
-			destination: "/iran/nomansland/api/[...id]",
+			destination: env.PUBLIC_APP_BASE_PATH
+				? ensureTrailingSlash(env.PUBLIC_APP_BASE_PATH) + "keystatic"
+				: "/keystatic",
 			status: 307,
 		},
 	},
