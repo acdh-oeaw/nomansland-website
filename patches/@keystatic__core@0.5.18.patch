@@ -1,0 +1,582 @@
+diff --git a/dist/index-63366f7a.js b/dist/index-63366f7a.js
+index 2aa365f6fecb3a2e1ac3be5f4d218ca02bb6c9be..037c3f8d76e6ec9520afd6eaf1968dc19146847c 100644
+--- a/dist/index-63366f7a.js
++++ b/dist/index-63366f7a.js
+@@ -1780,7 +1780,7 @@ function UserMenu(user) {
+     let items = [{
+       key: 'logout',
+       label: 'Log out',
+-      href: config.storage.kind === 'github' ? '/api/keystatic/github/logout' : undefined,
++      href: config.storage.kind === 'github' ? '/iran/nomansland/api/keystatic/github/logout' : undefined,
+       icon: logOutIcon
+     }];
+     if ((_config$cloud = config.cloud) !== null && _config$cloud !== void 0 && _config$cloud.project) {
+diff --git a/dist/index-7a0761be.js b/dist/index-7a0761be.js
+index ae129e725856451b65df5ee438966192924b6dcc..c4d033a1dd0fcf33eab624a81c8dd8b2194110c3 100644
+--- a/dist/index-7a0761be.js
++++ b/dist/index-7a0761be.js
+@@ -59,7 +59,7 @@ function RouterProvider(props) {
+   const router = useMemo(() => {
+     function navigate(url, replace) {
+       const newUrl = new URL(url, window.location.href);
+-      if (newUrl.origin !== window.location.origin || !newUrl.pathname.startsWith('/keystatic')) {
++      if (newUrl.origin !== window.location.origin || !newUrl.pathname.startsWith('/iran/nomansland/keystatic')) {
+         window.location.assign(newUrl);
+         return;
+       }
+@@ -68,7 +68,7 @@ function RouterProvider(props) {
+         setUrl(newUrl.toString());
+       });
+     }
+-    const replaced = location.pathname.replace(/^\/keystatic\/?/, '');
++    const replaced = location.pathname.replace(/^\/iran\/nomansland\/keystatic\/?/, '');
+     const params = replaced === '' ? [] : replaced.split('/').map(decodeURIComponent);
+     const parsedUrl = new URL(url);
+     return {
+@@ -981,7 +981,7 @@ async function redirectToCloudAuth(from, config) {
+   const url = new URL(`${KEYSTATIC_CLOUD_API_URL}/oauth/authorize`);
+   url.searchParams.set('state', state);
+   url.searchParams.set('client_id', config.cloud.project);
+-  url.searchParams.set('redirect_uri', `${window.location.origin}/keystatic/cloud/oauth/callback`);
++  url.searchParams.set('redirect_uri', `${window.location.origin}/iran/nomansland/keystatic/cloud/oauth/callback`);
+   url.searchParams.set('response_type', 'code');
+   url.searchParams.set('code_challenge_method', 'S256');
+   url.searchParams.set('code_challenge', code_challenge);
+@@ -1037,7 +1037,7 @@ async function getAuth(config) {
+     if (!_refreshTokenPromise) {
+       _refreshTokenPromise = (async () => {
+         try {
+-          const res = await fetch('/api/keystatic/github/refresh-token', {
++          const res = await fetch('/iran/nomansland/api/keystatic/github/refresh-token', {
+             method: 'POST'
+           });
+           if (res.status === 200) {
+@@ -1901,7 +1901,7 @@ function fetchLocalTree(sha) {
+   if (treeCache.has(sha)) {
+     return treeCache.get(sha);
+   }
+-  const promise = fetch('/api/keystatic/tree', {
++  const promise = fetch('/iran/nomansland/api/keystatic/tree', {
+     headers: {
+       'no-cors': '1'
+     }
+@@ -2107,7 +2107,7 @@ function GitHubAppShellProvider(props) {
+     var _error$response, _repo6;
+     if ((error === null || error === void 0 || (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
+       if (isGitHubConfig(props.config)) {
+-        window.location.href = `/api/keystatic/github/login?from=${router.params.map(encodeURIComponent).join('/')}`;
++        window.location.href = `/iran/nomansland/api/keystatic/github/login?from=${router.params.map(encodeURIComponent).join('/')}`;
+       } else {
+         redirectToCloudAuth(router.params.map(encodeURIComponent).join('/'), props.config);
+       }
+@@ -2116,7 +2116,7 @@ function GitHubAppShellProvider(props) {
+       var _err$originalError, _err$originalError2;
+       return (err === null || err === void 0 || (_err$originalError = err.originalError) === null || _err$originalError === void 0 ? void 0 : _err$originalError.type) === 'NOT_FOUND' || (err === null || err === void 0 || (_err$originalError2 = err.originalError) === null || _err$originalError2 === void 0 ? void 0 : _err$originalError2.type) === 'FORBIDDEN';
+     })) {
+-      window.location.href = `/api/keystatic/github/repo-not-found?from=${router.params.map(encodeURIComponent).join('/')}`;
++      window.location.href = `/iran/nomansland/api/keystatic/github/repo-not-found?from=${router.params.map(encodeURIComponent).join('/')}`;
+     }
+   }, [error, router, (_repo7 = repo) === null || _repo7 === void 0 ? void 0 : _repo7.id, props.config]);
+   const baseInfo = useMemo(() => {
+@@ -2420,7 +2420,7 @@ function useConfig() {
+ // -----------------------------------------------------------------------------
+ 
+ const AppStateContext = /*#__PURE__*/createContext({
+-  basePath: '/keystatic'
++  basePath: '/iran/nomansland/keystatic'
+ });
+ function useAppState() {
+   const appState = useContext(AppStateContext);
+@@ -3937,7 +3937,7 @@ function CollabAddToPathProvider(props) {
+     }
+     const avatars = [];
+     for (const [clientId, val] of awarenessStates) {
+-      if (clientId === yjsInfo.awareness.clientID || !val.user || router.href !== `/keystatic/branch/${val.branch}/${val.location}` || !Array.isArray(val.path) || !areArraysEqual(val.path, props.path)) {
++      if (clientId === yjsInfo.awareness.clientID || !val.user || router.href !== `/iran/nomansland/keystatic/branch/${val.branch}/${val.location}` || !Array.isArray(val.path) || !areArraysEqual(val.path, props.path)) {
+         continue;
+       }
+       avatars.push(val.user);
+diff --git a/dist/keystatic-core-api-generic.js b/dist/keystatic-core-api-generic.js
+index ede8a8af3ecf13078f044c081093e8e889185e80..3b3db4d60991d0e1bb0210a599a5975d2efe0a7a 100644
+--- a/dist/keystatic-core-api-generic.js
++++ b/dist/keystatic-core-api-generic.js
+@@ -97,7 +97,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+     } catch (err) {
+       throw new Error(`Found incomplete URL in Keystatic API route URL handler${(options === null || options === void 0 ? void 0 : options.slugEnvName) === 'NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG' ? ". Make sure you're using the latest version of @keystatic/next" : ''}`);
+     }
+-    return url.pathname.replace(/^\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
++    return url.pathname.replace(/^\/iran\/nomansland\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
+   };
+   if (_config2.config.storage.kind === 'local') {
+     const handler = localModeApiHandler(_config2.config, _config.localBaseDirectory);
+@@ -126,7 +126,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+         return createdGithubApp(req, options === null || options === void 0 ? void 0 : options.slugEnvName);
+       }
+       if (joined === 'github/login' || joined === 'github/repo-not-found' || joined === 'github/logout') {
+-        return redirect('/keystatic/setup');
++        return redirect('/iran/nomansland/keystatic/setup');
+       }
+       return {
+         status: 404,
+@@ -170,7 +170,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+           })
+         });
+       }
+-      return redirect('/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
++      return redirect('/iran/nomansland/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
+     }
+     return {
+       status: 404,
+@@ -194,7 +194,7 @@ async function githubOauthCallback(req, config) {
+   if (typeof errorDescription === 'string') {
+     return {
+       status: 400,
+-      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
++      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/iran/nomansland/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
+     };
+   }
+   const code = searchParams.get('code');
+@@ -242,7 +242,7 @@ async function githubOauthCallback(req, config) {
+       status: 200
+     };
+   }
+-  return redirect(`/keystatic${from ? `/${from}` : ''}`, headers);
++  return redirect(`/iran/nomansland/keystatic${from ? `/${from}` : ''}`, headers);
+ }
+ async function getTokenCookies(tokenData, config) {
+   const headers = [['Set-Cookie', cookie.serialize('keystatic-gh-access-token', tokenData.access_token, {
+@@ -318,7 +318,7 @@ async function refreshGitHubAuth(req, config) {
+ async function githubRepoNotFound(req, config) {
+   const headers = await refreshGitHubAuth(req, config);
+   if (headers) {
+-    return redirect('/keystatic/repo-not-found', headers);
++    return redirect('/iran/nomansland/keystatic/repo-not-found', headers);
+   }
+   return githubLogin(req, config);
+ }
+@@ -329,7 +329,7 @@ async function githubLogin(req, config) {
+   const state = bytesToHex(webcrypto.getRandomValues(new Uint8Array(10)));
+   const url = new URL('https://github.com/login/oauth/authorize');
+   url.searchParams.set('client_id', config.clientId);
+-  url.searchParams.set('redirect_uri', `${reqUrl.origin}/api/keystatic/github/oauth/callback`);
++  url.searchParams.set('redirect_uri', `${reqUrl.origin}/iran/nomansland/api/keystatic/github/oauth/callback`);
+   if (from === '/') {
+     return redirect(url.toString());
+   }
+diff --git a/dist/keystatic-core-api-generic.node.js b/dist/keystatic-core-api-generic.node.js
+index 340967842f3e7fa1a2012b903ec0fd3f350d46b2..5842ccf660e7e1a6c91c78896e9d38aba0f27966 100644
+--- a/dist/keystatic-core-api-generic.node.js
++++ b/dist/keystatic-core-api-generic.node.js
+@@ -91,7 +91,7 @@ ${slugEnvVarName ? `${slugEnvVarName}=${ghAppDataResult.slug}\n` : ''}`;
+   const newEnv = prevEnv ? `${prevEnv}\n\n${toAddToEnv}` : toAddToEnv;
+   await fs.writeFile('.env', newEnv);
+   await wait(200);
+-  return redirect('/keystatic/created-github-app?slug=' + ghAppDataResult.slug);
++  return redirect('/iran/nomansland/keystatic/created-github-app?slug=' + ghAppDataResult.slug);
+ }
+ function localModeApiHandler(config, localBaseDirectory) {
+   const baseDirectory = path.resolve(localBaseDirectory !== null && localBaseDirectory !== void 0 ? localBaseDirectory : process.cwd());
+@@ -302,7 +302,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+     } catch (err) {
+       throw new Error(`Found incomplete URL in Keystatic API route URL handler${(options === null || options === void 0 ? void 0 : options.slugEnvName) === 'NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG' ? ". Make sure you're using the latest version of @keystatic/next" : ''}`);
+     }
+-    return url.pathname.replace(/^\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
++    return url.pathname.replace(/^\/iran\/nomansland\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
+   };
+   if (_config2.config.storage.kind === 'local') {
+     const handler = localModeApiHandler(_config2.config, _config.localBaseDirectory);
+@@ -331,7 +331,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+         return createdGithubApp(req, options === null || options === void 0 ? void 0 : options.slugEnvName);
+       }
+       if (joined === 'github/login' || joined === 'github/repo-not-found' || joined === 'github/logout') {
+-        return redirect('/keystatic/setup');
++        return redirect('/iran/nomansland/keystatic/setup');
+       }
+       return {
+         status: 404,
+@@ -375,7 +375,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+           })
+         });
+       }
+-      return redirect('/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
++      return redirect('/iran/nomansland/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
+     }
+     return {
+       status: 404,
+@@ -399,7 +399,7 @@ async function githubOauthCallback(req, config) {
+   if (typeof errorDescription === 'string') {
+     return {
+       status: 400,
+-      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
++      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/iran/nomansland/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
+     };
+   }
+   const code = searchParams.get('code');
+@@ -447,7 +447,7 @@ async function githubOauthCallback(req, config) {
+       status: 200
+     };
+   }
+-  return redirect(`/keystatic${from ? `/${from}` : ''}`, headers);
++  return redirect(`/iran/nomansland/keystatic${from ? `/${from}` : ''}`, headers);
+ }
+ async function getTokenCookies(tokenData, config) {
+   const headers = [['Set-Cookie', cookie.serialize('keystatic-gh-access-token', tokenData.access_token, {
+@@ -523,7 +523,7 @@ async function refreshGitHubAuth(req, config) {
+ async function githubRepoNotFound(req, config) {
+   const headers = await refreshGitHubAuth(req, config);
+   if (headers) {
+-    return redirect('/keystatic/repo-not-found', headers);
++    return redirect('/iran/nomansland/keystatic/repo-not-found', headers);
+   }
+   return githubLogin(req, config);
+ }
+@@ -534,7 +534,7 @@ async function githubLogin(req, config) {
+   const state = bytesToHex(webcrypto.getRandomValues(new Uint8Array(10)));
+   const url = new URL('https://github.com/login/oauth/authorize');
+   url.searchParams.set('client_id', config.clientId);
+-  url.searchParams.set('redirect_uri', `${reqUrl.origin}/api/keystatic/github/oauth/callback`);
++  url.searchParams.set('redirect_uri', `${reqUrl.origin}/iran/nomansland/api/keystatic/github/oauth/callback`);
+   if (from === '/') {
+     return redirect(url.toString());
+   }
+diff --git a/dist/keystatic-core-api-generic.node.react-server.js b/dist/keystatic-core-api-generic.node.react-server.js
+index 4887898f3e31603670eef68a4b997e170cca158c..15d5868f861d64ee37d07b25b491309a896c6942 100644
+--- a/dist/keystatic-core-api-generic.node.react-server.js
++++ b/dist/keystatic-core-api-generic.node.react-server.js
+@@ -91,7 +91,7 @@ ${slugEnvVarName ? `${slugEnvVarName}=${ghAppDataResult.slug}\n` : ''}`;
+   const newEnv = prevEnv ? `${prevEnv}\n\n${toAddToEnv}` : toAddToEnv;
+   await fs.writeFile('.env', newEnv);
+   await wait(200);
+-  return redirect('/keystatic/created-github-app?slug=' + ghAppDataResult.slug);
++  return redirect('/iran/nomansland/keystatic/created-github-app?slug=' + ghAppDataResult.slug);
+ }
+ function localModeApiHandler(config, localBaseDirectory) {
+   const baseDirectory = path.resolve(localBaseDirectory !== null && localBaseDirectory !== void 0 ? localBaseDirectory : process.cwd());
+@@ -302,7 +302,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+     } catch (err) {
+       throw new Error(`Found incomplete URL in Keystatic API route URL handler${(options === null || options === void 0 ? void 0 : options.slugEnvName) === 'NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG' ? ". Make sure you're using the latest version of @keystatic/next" : ''}`);
+     }
+-    return url.pathname.replace(/^\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
++    return url.pathname.replace(/^\/iran\/nomansland\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
+   };
+   if (_config2.config.storage.kind === 'local') {
+     const handler = localModeApiHandler(_config2.config, _config.localBaseDirectory);
+@@ -331,7 +331,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+         return createdGithubApp(req, options === null || options === void 0 ? void 0 : options.slugEnvName);
+       }
+       if (joined === 'github/login' || joined === 'github/repo-not-found' || joined === 'github/logout') {
+-        return redirect('/keystatic/setup');
++        return redirect('/iran/nomansland/keystatic/setup');
+       }
+       return {
+         status: 404,
+@@ -375,7 +375,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+           })
+         });
+       }
+-      return redirect('/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
++      return redirect('/iran/nomansland/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
+     }
+     return {
+       status: 404,
+@@ -399,7 +399,7 @@ async function githubOauthCallback(req, config) {
+   if (typeof errorDescription === 'string') {
+     return {
+       status: 400,
+-      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
++      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/iran/nomansland/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
+     };
+   }
+   const code = searchParams.get('code');
+@@ -447,7 +447,7 @@ async function githubOauthCallback(req, config) {
+       status: 200
+     };
+   }
+-  return redirect(`/keystatic${from ? `/${from}` : ''}`, headers);
++  return redirect(`/iran/nomansland/keystatic${from ? `/${from}` : ''}`, headers);
+ }
+ async function getTokenCookies(tokenData, config) {
+   const headers = [['Set-Cookie', cookie.serialize('keystatic-gh-access-token', tokenData.access_token, {
+@@ -534,7 +534,7 @@ async function githubLogin(req, config) {
+   const state = bytesToHex(webcrypto.getRandomValues(new Uint8Array(10)));
+   const url = new URL('https://github.com/login/oauth/authorize');
+   url.searchParams.set('client_id', config.clientId);
+-  url.searchParams.set('redirect_uri', `${reqUrl.origin}/api/keystatic/github/oauth/callback`);
++  url.searchParams.set('redirect_uri', `${reqUrl.origin}/iran/nomansland/api/keystatic/github/oauth/callback`);
+   if (from === '/') {
+     return redirect(url.toString());
+   }
+diff --git a/dist/keystatic-core-api-generic.react-server.js b/dist/keystatic-core-api-generic.react-server.js
+index 7093f925a395b9a6fbeee95d8e967cb6dbef8bdd..28b4ea2dd1d8bc40697c8f06569d877abda819da 100644
+--- a/dist/keystatic-core-api-generic.react-server.js
++++ b/dist/keystatic-core-api-generic.react-server.js
+@@ -116,7 +116,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+     } catch (err) {
+       throw new Error(`Found incomplete URL in Keystatic API route URL handler${(options === null || options === void 0 ? void 0 : options.slugEnvName) === 'NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG' ? ". Make sure you're using the latest version of @keystatic/next" : ''}`);
+     }
+-    return url.pathname.replace(/^\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
++    return url.pathname.replace(/^\/iran\/nomansland\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
+   };
+   if (_config2.config.storage.kind === 'local') {
+     const handler = localModeApiHandler(_config2.config, _config.localBaseDirectory);
+@@ -145,7 +145,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+         return createdGithubApp(req, options === null || options === void 0 ? void 0 : options.slugEnvName);
+       }
+       if (joined === 'github/login' || joined === 'github/repo-not-found' || joined === 'github/logout') {
+-        return redirect('/keystatic/setup');
++        return redirect('/iran/nomansland/keystatic/setup');
+       }
+       return {
+         status: 404,
+@@ -189,7 +189,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+           })
+         });
+       }
+-      return redirect('/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
++      return redirect('/iran/nomansland/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
+     }
+     return {
+       status: 404,
+@@ -213,7 +213,7 @@ async function githubOauthCallback(req, config) {
+   if (typeof errorDescription === 'string') {
+     return {
+       status: 400,
+-      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
++      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/iran/nomansland/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
+     };
+   }
+   const code = searchParams.get('code');
+@@ -261,7 +261,7 @@ async function githubOauthCallback(req, config) {
+       status: 200
+     };
+   }
+-  return redirect(`/keystatic${from ? `/${from}` : ''}`, headers);
++  return redirect(`/iran/nomansland/keystatic${from ? `/${from}` : ''}`, headers);
+ }
+ async function getTokenCookies(tokenData, config) {
+   const headers = [['Set-Cookie', cookie.serialize('keystatic-gh-access-token', tokenData.access_token, {
+@@ -348,7 +348,7 @@ async function githubLogin(req, config) {
+   const state = bytesToHex(webcrypto.getRandomValues(new Uint8Array(10)));
+   const url = new URL('https://github.com/login/oauth/authorize');
+   url.searchParams.set('client_id', config.clientId);
+-  url.searchParams.set('redirect_uri', `${reqUrl.origin}/api/keystatic/github/oauth/callback`);
++  url.searchParams.set('redirect_uri', `${reqUrl.origin}/iran/nomansland/api/keystatic/github/oauth/callback`);
+   if (from === '/') {
+     return redirect(url.toString());
+   }
+diff --git a/dist/keystatic-core-api-generic.worker.js b/dist/keystatic-core-api-generic.worker.js
+index 7093f925a395b9a6fbeee95d8e967cb6dbef8bdd..28b4ea2dd1d8bc40697c8f06569d877abda819da 100644
+--- a/dist/keystatic-core-api-generic.worker.js
++++ b/dist/keystatic-core-api-generic.worker.js
+@@ -116,7 +116,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+     } catch (err) {
+       throw new Error(`Found incomplete URL in Keystatic API route URL handler${(options === null || options === void 0 ? void 0 : options.slugEnvName) === 'NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG' ? ". Make sure you're using the latest version of @keystatic/next" : ''}`);
+     }
+-    return url.pathname.replace(/^\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
++    return url.pathname.replace(/^\/iran\/nomansland\/api\/keystatic\/?/, '').split('/').map(x => decodeURIComponent(x)).filter(Boolean);
+   };
+   if (_config2.config.storage.kind === 'local') {
+     const handler = localModeApiHandler(_config2.config, _config.localBaseDirectory);
+@@ -145,7 +145,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+         return createdGithubApp(req, options === null || options === void 0 ? void 0 : options.slugEnvName);
+       }
+       if (joined === 'github/login' || joined === 'github/repo-not-found' || joined === 'github/logout') {
+-        return redirect('/keystatic/setup');
++        return redirect('/iran/nomansland/keystatic/setup');
+       }
+       return {
+         status: 404,
+@@ -189,7 +189,7 @@ function makeGenericAPIRouteHandler(_config, options) {
+           })
+         });
+       }
+-      return redirect('/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
++      return redirect('/iran/nomansland/keystatic', [['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-access-token')], ['Set-Cookie', immediatelyExpiringCookie('keystatic-gh-refresh-token')]]);
+     }
+     return {
+       status: 404,
+@@ -213,7 +213,7 @@ async function githubOauthCallback(req, config) {
+   if (typeof errorDescription === 'string') {
+     return {
+       status: 400,
+-      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
++      body: `An error occurred when trying to authenticate with GitHub:\n${errorDescription}${error === 'redirect_uri_mismatch' ? `\n\nIf you were trying to sign in locally and recently upgraded Keystatic from @keystatic/core@0.0.69 or below, you need to add \`http://127.0.0.1/iran/nomansland/api/keystatic/github/oauth/callback\` as a callback URL in your GitHub app.` : ''}`
+     };
+   }
+   const code = searchParams.get('code');
+@@ -261,7 +261,7 @@ async function githubOauthCallback(req, config) {
+       status: 200
+     };
+   }
+-  return redirect(`/keystatic${from ? `/${from}` : ''}`, headers);
++  return redirect(`/iran/nomansland/keystatic${from ? `/${from}` : ''}`, headers);
+ }
+ async function getTokenCookies(tokenData, config) {
+   const headers = [['Set-Cookie', cookie.serialize('keystatic-gh-access-token', tokenData.access_token, {
+@@ -348,7 +348,7 @@ async function githubLogin(req, config) {
+   const state = bytesToHex(webcrypto.getRandomValues(new Uint8Array(10)));
+   const url = new URL('https://github.com/login/oauth/authorize');
+   url.searchParams.set('client_id', config.clientId);
+-  url.searchParams.set('redirect_uri', `${reqUrl.origin}/api/keystatic/github/oauth/callback`);
++  url.searchParams.set('redirect_uri', `${reqUrl.origin}/iran/nomansland/api/keystatic/github/oauth/callback`);
+   if (from === '/') {
+     return redirect(url.toString());
+   }
+diff --git a/dist/keystatic-core-ui.js b/dist/keystatic-core-ui.js
+index 0b9096adaebf0995ec916bdb2641643343e50505..a2af321a05a330ef7afd3870b8c007dbb2164898 100644
+--- a/dist/keystatic-core-ui.js
++++ b/dist/keystatic-core-ui.js
+@@ -508,7 +508,7 @@ function fetchBlob(config, oid, filepath, commitSha, isRepoPrivate, repo) {
+         return stored;
+       }
+     }
+-    return (isLocal ? fetch(`/api/keystatic/blob/${oid}/${filepath}`, {
++    return (isLocal ? fetch(`/iran/nomansland/api/iran/nomansland/keystatic/blob/${oid}/${filepath}`, {
+       headers: {
+         'no-cors': '1'
+       }
+@@ -1441,7 +1441,7 @@ function PresenceAvatars() {
+   if (!cloudInfo) return null;
+   return /*#__PURE__*/jsx(HStack, {
+     children: [...awarenessStates.values()].map(val => {
+-      if (!val.user || router.href !== `/keystatic/branch/${val.branch}/${val.location}`) {
++      if (!val.user || router.href !== `/iran/nomansland/keystatic/branch/${val.branch}/${val.location}`) {
+         return null;
+       }
+       return /*#__PURE__*/jsx(Avatar, {
+@@ -1486,7 +1486,7 @@ function createUrqlClient(config) {
+           authState = getSyncAuth(config);
+           if (operation.query.definitions[0].kind === 'OperationDefinition' && (_operation$query$defi = operation.query.definitions[0].name) !== null && _operation$query$defi !== void 0 && _operation$query$defi.value.includes('AppShell') && !authState) {
+             if (config.storage.kind === 'github') {
+-              window.location.href = '/api/keystatic/github/login';
++              window.location.href = '/iran/nomansland/api/keystatic/github/login';
+             } else {
+               redirectToCloudAuth('', config);
+             }
+@@ -1752,7 +1752,7 @@ function useUpsertItem(args) {
+         }
+         throw new Error('Failed to update');
+       } else {
+-        const res = await fetch('/api/keystatic/update', {
++        const res = await fetch('/iran/nomansland/api/keystatic/update', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+@@ -1872,7 +1872,7 @@ function useDeleteItem(args) {
+         });
+         return true;
+       } else {
+-        const res = await fetch('/api/keystatic/update', {
++        const res = await fetch('/iran/nomansland/api/keystatic/update', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+@@ -2094,7 +2094,7 @@ function ItemPageInner(props) {
+         children: updateResult.kind === 'needs-new-branch' && /*#__PURE__*/jsx(CreateBranchDuringUpdateDialog, {
+           branchOid: baseCommit,
+           onCreate: async newBranch => {
+-            const itemBasePath = `/keystatic/branch/${encodeURIComponent(newBranch)}/collection/${encodeURIComponent(collection)}/item/`;
++            const itemBasePath = `/iran/nomansland/keystatic/branch/${encodeURIComponent(newBranch)}/collection/${encodeURIComponent(collection)}/item/`;
+             router.push(itemBasePath + encodeURIComponent(itemSlug));
+             const slug = getSlugFromState(collectionConfig, props.state);
+             const hasUpdated = await parentOnUpdate({
+@@ -3117,13 +3117,13 @@ function CreateItemInner(props) {
+       children: createResult.kind === 'needs-new-branch' && /*#__PURE__*/jsx(CreateBranchDuringUpdateDialog, {
+         branchOid: baseCommit,
+         onCreate: async newBranch => {
+-          router.push(`/keystatic/branch/${encodeURIComponent(newBranch)}/collection/${encodeURIComponent(props.collection)}/create`);
++          router.push(`/iran/nomansland/keystatic/branch/${encodeURIComponent(newBranch)}/collection/${encodeURIComponent(props.collection)}/create`);
+           if (await props.createItem({
+             branch: newBranch,
+             sha: baseCommit
+           })) {
+             const slug = getSlugFromState(collectionConfig, props.state);
+-            router.push(`/keystatic/branch/${encodeURIComponent(newBranch)}/collection/${encodeURIComponent(props.collection)}/item/${encodeURIComponent(slug)}`);
++            router.push(`/iran/nomansland/keystatic/branch/${encodeURIComponent(newBranch)}/collection/${encodeURIComponent(props.collection)}/item/${encodeURIComponent(slug)}`);
+           }
+         },
+         reason: createResult.reason,
+@@ -3675,7 +3675,7 @@ function SingletonPageInner(props) {
+         children: props.updateResult.kind === 'needs-new-branch' && /*#__PURE__*/jsx(CreateBranchDuringUpdateDialog, {
+           branchOid: baseCommit,
+           onCreate: async newBranch => {
+-            router.push(`/keystatic/branch/${encodeURIComponent(newBranch)}/singleton/${encodeURIComponent(props.singleton)}`);
++            router.push(`/iran/nomansland/keystatic/branch/${encodeURIComponent(newBranch)}/singleton/${encodeURIComponent(props.singleton)}`);
+             props.onUpdate({
+               branch: newBranch,
+               sha: baseCommit
+@@ -4082,10 +4082,10 @@ function KeystaticSetup(props) {
+         }),
+         value: JSON.stringify({
+           name: `${parseRepoConfig(props.config.storage.repo).owner} Keystatic`,
+-          url: deployedURL ? `${deployedURL}/keystatic` : `${window.location.origin}/keystatic`,
++          url: deployedURL ? `${deployedURL}/iran/nomansland/keystatic` : `${window.location.origin}/iran/nomansland/keystatic`,
+           public: true,
+-          redirect_url: `${window.location.origin}/api/keystatic/github/created-app`,
+-          callback_urls: [`${window.location.origin}/api/keystatic/github/oauth/callback`, `http://127.0.0.1/api/keystatic/github/oauth/callback`, ...(deployedURL ? [`${deployedURL}/api/keystatic/github/oauth/callback`] : [])],
++          redirect_url: `${window.location.origin}/iran/nomansland/api/keystatic/github/created-app`,
++          callback_urls: [`${window.location.origin}/iran/nomansland/api/keystatic/github/oauth/callback`, `http://127.0.0.1/iran/nomansland/api/keystatic/github/oauth/callback`, ...(deployedURL ? [`${deployedURL}/iran/nomansland/api/keystatic/github/oauth/callback`] : [])],
+           request_oauth_on_install: true,
+           default_permissions: {
+             contents: 'write',
+@@ -4176,7 +4176,7 @@ function KeystaticCloudAuthCallback({
+           body: new URLSearchParams({
+             code,
+             client_id: project,
+-            redirect_uri: `${window.location.origin}/keystatic/cloud/oauth/callback`,
++            redirect_uri: `${window.location.origin}/iran/nomansland/keystatic/cloud/oauth/callback`,
+             code_verifier: storedState.code_verifier,
+             grant_type: 'authorization_code'
+           }).toString(),
+@@ -4195,7 +4195,7 @@ function KeystaticCloudAuthCallback({
+           project,
+           validUntil: Date.now() + parsed.expires_in * 1000
+         }));
+-        router.push(`/keystatic/${storedState.from}`);
++        router.push(`/iran/nomansland/keystatic/${storedState.from}`);
+       })().catch(error => {
+         setError(error);
+       });
+@@ -4277,16 +4277,16 @@ function RedirectToBranch(props) {
+     var _error$response, _data$repository, _data$repository2, _error$graphQLErrors, _error$graphQLErrors2;
+     if ((error === null || error === void 0 || (_error$response = error.response) === null || _error$response === void 0 ? void 0 : _error$response.status) === 401) {
+       if (props.config.storage.kind === 'github') {
+-        window.location.href = '/api/keystatic/github/login';
++        window.location.href = '/iran/nomansland/api/keystatic/github/login';
+       } else {
+         redirectToCloudAuth('', props.config);
+       }
+     }
+     if (data !== null && data !== void 0 && (_data$repository = data.repository) !== null && _data$repository !== void 0 && _data$repository.defaultBranchRef) {
+-      push(`/keystatic/branch/${encodeURIComponent(data.repository.defaultBranchRef.name)}`);
++      push(`/iran/nomansland/keystatic/branch/${encodeURIComponent(data.repository.defaultBranchRef.name)}`);
+     }
+     if (props.config.storage.kind === 'github' && !(data !== null && data !== void 0 && (_data$repository2 = data.repository) !== null && _data$repository2 !== void 0 && _data$repository2.id) && (error === null || error === void 0 || (_error$graphQLErrors = error.graphQLErrors) === null || _error$graphQLErrors === void 0 || (_error$graphQLErrors = _error$graphQLErrors[0]) === null || _error$graphQLErrors === void 0 || (_error$graphQLErrors = _error$graphQLErrors.originalError) === null || _error$graphQLErrors === void 0 ? void 0 : _error$graphQLErrors.type) === 'NOT_FOUND' || (error === null || error === void 0 || (_error$graphQLErrors2 = error.graphQLErrors) === null || _error$graphQLErrors2 === void 0 || (_error$graphQLErrors2 = _error$graphQLErrors2[0]) === null || _error$graphQLErrors2 === void 0 || (_error$graphQLErrors2 = _error$graphQLErrors2.originalError) === null || _error$graphQLErrors2 === void 0 ? void 0 : _error$graphQLErrors2.type) === 'FORBIDDEN') {
+-      window.location.href = '/api/keystatic/github/repo-not-found';
++      window.location.href = '/iran/nomansland/api/keystatic/github/repo-not-found';
+     }
+   }, [data, error, push, props.config]);
+   return null;
+@@ -4348,11 +4348,11 @@ function PageInner({
+       });
+     }
+     branch = params[1];
+-    basePath = `/keystatic/branch/${encodeURIComponent(branch)}`;
++    basePath = `/iran/nomansland/keystatic/branch/${encodeURIComponent(branch)}`;
+     parsedParams = parseParamsWithoutBranch(params.slice(2));
+   } else {
+     parsedParams = parseParamsWithoutBranch(params);
+-    basePath = '/keystatic';
++    basePath = '/iran/nomansland/keystatic';
+   }
+   return wrapper( /*#__PURE__*/jsx(AppShell, {
+     config: config,
+@@ -4416,7 +4416,7 @@ function AuthWrapper(props) {
+         alignItems: "center",
+         height: "100vh",
+         children: /*#__PURE__*/jsxs(Button, {
+-          href: `/api/keystatic/github/login${router.params.length ? `?${new URLSearchParams({
++          href: `/iran/nomansland/api/keystatic/github/login${router.params.length ? `?${new URLSearchParams({
+             from: router.params.map(encodeURIComponent).join('/')
+           })}` : ''}`
+           // even though we'll never be in an iframe, so this isn't really distinct from _self

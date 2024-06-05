@@ -16,6 +16,8 @@ USER node
 COPY --chown=node:node .npmrc package.json pnpm-lock.yaml ./
 RUN sed -i "s/use-node-version/# use-node-version/" .npmrc
 
+COPY --chown=node:node ./patches ./patches
+
 RUN pnpm fetch --prod
 RUN pnpm install --frozen-lockfile --ignore-scripts --offline --prod
 

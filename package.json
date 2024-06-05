@@ -120,6 +120,11 @@
 		"type-fest": "^4.19.0",
 		"typescript": "^5.4.5"
 	},
+	"pnpm": {
+		"patchedDependencies": {
+			"@keystatic/core@0.5.18": "patches/@keystatic__core@0.5.18.patch"
+		}
+	},
 	"browserslist": {
 		"development": [
 			"last 1 chrome version",

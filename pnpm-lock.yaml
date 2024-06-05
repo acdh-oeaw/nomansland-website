@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@keystatic/core@0.5.18':
+    hash: rpq26nrkexj54gwrrnsk43sjna
+    path: patches/@keystatic__core@0.5.18.patch
+
 importers:
 
   .:
@@ -40,10 +45,10 @@ importers:
         version: 1.1.189
       '@keystatic/astro':
         specifier: ^5.0.0
-        version: 5.0.0(@keystatic/core@0.5.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(astro@4.9.3(@types/node@20.14.2)(typescript@5.4.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 5.0.0(@keystatic/core@0.5.18(patch_hash=rpq26nrkexj54gwrrnsk43sjna)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(astro@4.9.3(@types/node@20.14.2)(typescript@5.4.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@keystatic/core':
         specifier: ^0.5.18
-        version: 0.5.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.5.18(patch_hash=rpq26nrkexj54gwrrnsk43sjna)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mdx-js/mdx':
         specifier: ^3.0.1
         version: 3.0.1
@@ -6705,10 +6710,10 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@keystatic/astro@5.0.0(@keystatic/core@0.5.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(astro@4.9.3(@types/node@20.14.2)(typescript@5.4.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@keystatic/astro@5.0.0(@keystatic/core@0.5.18(patch_hash=rpq26nrkexj54gwrrnsk43sjna)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(astro@4.9.3(@types/node@20.14.2)(typescript@5.4.5))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.5
-      '@keystatic/core': 0.5.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@keystatic/core': 0.5.18(patch_hash=rpq26nrkexj54gwrrnsk43sjna)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react': 18.3.3
       astro: 4.9.3(@types/node@20.14.2)(typescript@5.4.5)
       cookie: 0.5.0
@@ -6716,7 +6721,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       set-cookie-parser: 2.6.0
 
-  '@keystatic/core@0.5.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@keystatic/core@0.5.18(patch_hash=rpq26nrkexj54gwrrnsk43sjna)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.24.5
       '@braintree/sanitize-url': 6.0.4
