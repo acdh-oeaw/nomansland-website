@@ -93,7 +93,7 @@ test.skip("should add json+ld metadata", async ({ createIndexPage }) => {
 });
 
 test("should serve an open-graph image", async ({ createIndexPage, request }) => {
-	const imagePath = "/opengraph-image.png";
+	const imagePath = "/opengraph-image.jpg";
 
 	const { indexPage } = await createIndexPage();
 	await indexPage.goto();
@@ -108,7 +108,7 @@ test("should serve an open-graph image", async ({ createIndexPage, request }) =>
 	const contentType = response.headers()["content-type"];
 
 	expect(status).toBe(200);
-	expect(contentType).toBe("image/png");
+	expect(contentType).toBe("image/jpeg");
 });
 
 test("should set `lang` attribute on `html` element", async ({ createIndexPage }) => {

@@ -30,7 +30,7 @@ const metadata = t("metadata");
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const manifestUrl = withBasePath("/manifest.webmanifest");
-const openGraphImageUrl = new URL(withBasePath("/opengraph-image.png"), Astro.site);
+const openGraphImageUrl = new URL(withBasePath("/opengraph-image.jpg"), Astro.site);
 const sitemapUrl = withBasePath("/sitemap-index.xml");
 const rssUrl = new URL(withBasePath("/feed.xml"), Astro.site);
 
@@ -85,7 +85,6 @@ const googleSiteVerification = env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 		}
 
 		<link rel="icon" href={withBasePath("/favicon.ico")} type="image/x-icon" sizes="32x32" />
-		<link rel="icon" href={withBasePath("/icon.svg")} type="image/svg+xml" sizes="any" />
 		<link
 			rel="apple-touch-icon"
 			href={withBasePath("/apple-icon.png")}
