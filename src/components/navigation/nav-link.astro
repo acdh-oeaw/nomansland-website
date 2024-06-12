@@ -12,6 +12,4 @@ const pathname =
 const isCurrent = pathname === Astro.url.pathname;
 ---
 
-<a {...rest} aria-current={isCurrent ? "page" : undefined} href={pathname}>
-	<slot />
-</a>
+<a {...rest} aria-current={isCurrent ? "page" : undefined} href={pathname}><slot /></a>
