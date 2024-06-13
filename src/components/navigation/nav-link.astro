@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
+import { ensureTrailingSlash } from "@/lib/ensure-trailing-slash";
 import { withBasePath } from "@/lib/with-base-path";
 
 interface Props extends HTMLAttributes<"a"> {}
@@ -8,7 +9,9 @@ interface Props extends HTMLAttributes<"a"> {}
 const { href, ...rest } = Astro.props;
 
 const pathname =
-	href != null ? withBasePath(typeof href === "string" ? href : href.pathname) : undefined;
+	href != null
+		? withBasePath(typeof href === "string" ? href : ensureTrailingSlash(href.pathname))
+		: undefined;
 const isCurrent = pathname === Astro.url.pathname;
 ---
 
