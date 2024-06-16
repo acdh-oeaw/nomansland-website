@@ -21,7 +21,6 @@ const { image, summary, link, title } = Astro.props;
 	{
 		image != null ? (
 			<NavLink aria-label={link.label} class="relative block aspect-[1.5]" href={link.href}>
-				{/* @ts-expect-error Upstream type issue. */}
 				<Image
 					alt=""
 					class="absolute inset-0 size-full object-cover"

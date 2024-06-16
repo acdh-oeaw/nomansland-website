@@ -13,7 +13,6 @@ const { logo, label, href } = Astro.props;
 ---
 
 <div class="grid grid-cols-[120px_1fr] items-center gap-x-4">
-	{/* @ts-expect-error Upstream type issue. */}
 	<Image alt="" class="max-h-20 object-contain" src={getImageImport(logo)} />
 	<div>
 		<a href={href}>{label}</a>
