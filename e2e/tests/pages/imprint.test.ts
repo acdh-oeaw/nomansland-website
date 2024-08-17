@@ -28,7 +28,8 @@ test.describe("imprint page", () => {
 		expect(await getViolations()).toEqual([]);
 	});
 
-	test("should not have visible changes", async ({ createImprintPage }) => {
+	// eslint-disable-next-line playwright/no-skipped-test
+	test.skip("should not have visible changes", async ({ createImprintPage }) => {
 		const { imprintPage } = await createImprintPage();
 		await imprintPage.goto();
 

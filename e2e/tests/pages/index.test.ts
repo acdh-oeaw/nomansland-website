@@ -20,4 +20,12 @@ test.describe("index page", () => {
 		const { getViolations } = await createAccessibilityScanner();
 		expect(await getViolations()).toEqual([]);
 	});
+
+	// eslint-disable-next-line playwright/no-skipped-test
+	test.skip("should not have visible changes", async ({ createIndexPage }) => {
+		const { indexPage } = await createIndexPage();
+		await indexPage.goto();
+
+		await expect(indexPage.page).toHaveScreenshot();
+	});
 });
