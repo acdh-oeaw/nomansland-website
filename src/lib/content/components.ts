@@ -8,7 +8,7 @@ import TableOfContents from "@/components/content/table-of-contents.astro";
 import NavLink from "@/components/navigation/nav-link.astro";
 
 const components = {
-	a: NavLink as any,
+	a: NavLink,
 	Download,
 	Figure,
 	img: Img,
