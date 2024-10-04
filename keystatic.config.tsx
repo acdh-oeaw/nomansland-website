@@ -4,7 +4,7 @@ import { block, mark, wrapper } from "@keystatic/core/content-components";
 import { DownloadIcon, ImageIcon, LinkIcon, ListIcon } from "lucide-react";
 
 import { Logo } from "@/components/logo";
-import { createAssetPaths, createPreviewUrl } from "@/config/content.config";
+import { createAssetPaths } from "@/config/content.config";
 import { env } from "@/config/env.config";
 
 function createComponents(
@@ -120,7 +120,6 @@ export default config({
 			path: "./content/pages/**",
 			slugField: "title",
 			format: { contentField: "content" },
-			previewUrl: createPreviewUrl("/{slug}"),
 			entryLayout: "content",
 			columns: ["title"],
 			schema: {
