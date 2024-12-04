@@ -41,6 +41,15 @@ export function safeJsonLdReplacer(_key: string, value: JsonValue): JsonValue | 
 			return escape(value);
 		}
 
+		case "symbol": {
+			throw new Error('Not implemented yet: "symbol" case');
+		}
+		case "undefined": {
+			throw new Error('Not implemented yet: "undefined" case');
+		}
+		case "function": {
+			throw new Error('Not implemented yet: "function" case');
+		}
 		default: {
 			return undefined;
 		}

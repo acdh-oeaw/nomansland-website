@@ -94,9 +94,9 @@ const documentTitle = t("IndexPage.meta.title");
 														<li>
 															<Card
 																image={item.image ?? undefined}
+																link={{ label: t("IndexPage.card.read-more"), href: `/${id}` }}
 																summary={item.summary || t("IndexPage.card.no-summary")}
 																title={item.title}
-																link={{ label: t("IndexPage.card.read-more"), href: `/${id}` }}
 															/>
 														</li>
 													);

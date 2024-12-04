@@ -208,7 +208,7 @@ export default config({
 								cardsSection: {
 									label: "Cards section",
 									itemLabel(props) {
-										return props.fields.title.value + " (Cards)";
+										return `${props.fields.title.value} (Cards)`;
 									},
 									schema: fields.object(
 										{
@@ -395,7 +395,7 @@ export default config({
 						menu: {
 							label: "Menu",
 							itemLabel(props) {
-								return props.fields.label.value + " (Menu)";
+								return `${props.fields.label.value} (Menu)`;
 							},
 							schema: fields.object({
 								label: fields.text({
