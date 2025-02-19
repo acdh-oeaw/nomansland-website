@@ -7,12 +7,12 @@ website for the "nomads' manuscripts landscape" (nomansland) project. deployed a
 
 prerequisites:
 
-- [node.js 20.x](https://nodejs.org/en/download)
-- [pnpm 9.x](https://pnpm.io/installation)
+- [node.js 22.x](https://nodejs.org/en/download)
+- [pnpm 10.x](https://pnpm.io/installation)
 
 > [!TIP]
 >
-> you can use `pnpm` to install the required node.js version with `pnpm env use 20 --global`
+> you can use `pnpm` to install the required node.js version with `pnpm env use 22 --global`
 
 set required environment variables in `.env.local`:
 
