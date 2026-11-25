@@ -90,6 +90,7 @@ export const withMdxTableOfContents = function withMdxTableOfContents() {
 							type: "ExportNamedDeclaration",
 							source: null,
 							specifiers: [],
+							attributes: [],
 							declaration: {
 								type: "VariableDeclaration",
 								kind: "const",

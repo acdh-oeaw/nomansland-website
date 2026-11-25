@@ -1,66 +1,21 @@
-## .gitignore ##
+# Build context allowlist.
+**
 
-# dependencies
-node_modules/
-.pnpm-store/
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!astro.config.ts
+!keystatic.config.tsx
+!tsconfig.json
+!.gitignore
 
-# logs
-*.log
+!src/**
+!content/**
+!public/**
+!scripts/prune-assets.ts
 
-# non-public environment variables
-.env.local
-.env.*.local
+# Runtime configuration is copied separately from application sources.
+!Caddyfile
 
-# caches
-.eslintcache
-.stylelintcache
-*.tsbuildinfo
-
-# vercel
-.vercel
-
-# misc
-.DS_Store
-.idea/
-
-# astro
-dist/
-.astro/
-
-# test
-/coverage/
-
-# playwright
-/blob-report/
-/playwright/.cache/
-/playwright-report/
-/test-results/
-
-
-## .dockerignore ##
-
-# git
-.git/
-.gitattributes
-.gitignore
-
-# github
-.github/
-
-# vscode settings
-.vscode/
-
-# environment variables
-.env
-.env.*
-
-# tests
-playwright.config.ts
-/e2e/
-/test/
-
-# misc
-.editorconfig
-
-# astro assets cache
-!/node_modules/.astro/
+# Restore only reusable Astro images, never installed dependencies.
+!node_modules/.astro/assets/**

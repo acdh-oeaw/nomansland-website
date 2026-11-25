@@ -1,12 +1,13 @@
+import { existsSync } from "node:fs";
 import { join } from "node:path";
+import { loadEnvFile } from "node:process";
 
 import { defineConfig, devices } from "@playwright/test";
 import { isCI } from "ci-info";
-import { config as dotenv } from "dotenv";
-import { expand } from "dotenv-expand";
 
 for (const envFilePath of [".env.test.local", ".env.local", ".env.test", ".env"]) {
-	expand(dotenv({ path: join(process.cwd(), envFilePath) }));
+	const path = join(process.cwd(), envFilePath);
+	if (existsSync(path)) loadEnvFile(path);
 }
 
 const port = 3000;
@@ -70,6 +71,7 @@ export default defineConfig({
 	],
 	webServer: {
 		command: "pnpm run start",
+		env: { ASTRO_PREVIEW_BACKGROUND: "0" },
 		url: baseUrl,
 		reuseExistingServer: !isCI,
 	},
