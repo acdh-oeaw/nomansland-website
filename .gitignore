@@ -28,6 +28,7 @@ dist/
 /coverage/
 
 # playwright
+.playwright-cli/
 /blob-report/
 /playwright/.cache/
 /playwright-report/

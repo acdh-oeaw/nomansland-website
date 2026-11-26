@@ -76,17 +76,19 @@ const imprint = t("WebsiteFooter.links.imprint");
 				<a class="inline-flex py-1" href="https://www.oeaw.ac.at/acdh/">
 					<img
 						alt=""
-						class="size-16"
+						class="size-16 object-contain"
 						loading="lazy"
-						src={withBasePath("/assets/images/acdh-ch-logo-light.svg")}
+						src={withBasePath("/assets/images/acdh-logo.svg")}
+						width={188}
+						height={220}
 					/>
-					<span class="sr-only">ACDH-CH</span>
+					<span class="sr-only">ACDH</span>
 				</a>
 			</div>
 			<div class="grid gap-y-2">
-				<div class="font-medium">Technical implementation: ACDH-CH</div>
+				<div class="font-medium">Technical implementation: ACDH</div>
 				<div>
-					Austrian Centre for Digital Humanities and Cultural Heritage
+					Austrian Centre for Digital Humanities
 					<br />
 					Austrian Academy of Sciences
 				</div>
@@ -107,9 +109,9 @@ const imprint = t("WebsiteFooter.links.imprint");
 						E:
 						<a
 							class="underline decoration-dotted underline-offset-4 hover:no-underline"
-							href="mailto:acdh-ch@oeaw.ac.at"
+							href="mailto:acdh-office@oeaw.ac.at"
 						>
-							acdh-ch@oeaw.ac.at
+							acdh-office@oeaw.ac.at
 						</a>
 					</div>
 				</div>
@@ -122,7 +124,7 @@ const imprint = t("WebsiteFooter.links.imprint");
 				<div>
 					<a
 						class="underline decoration-dotted underline-offset-4 hover:no-underline"
-						href="mailto:acdh-ch-helpdesk@oeaw.ac.at"
+						href="mailto:acdh-helpdesk@oeaw.ac.at"
 					>
 						{t("WebsiteFooter.contact")}
 					</a>
