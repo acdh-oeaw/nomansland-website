@@ -11,6 +11,10 @@
 		file_server
 	}
 
+	handle /health {
+		respond "OK" 200
+	}
+
 	handle {
 		error 404
 	}
