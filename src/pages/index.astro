@@ -33,91 +33,85 @@ const documentTitle = t("IndexPage.meta.title");
 				/>
 				<div class="absolute inset-0 size-full bg-[#0b406faa]"></div>
 			</div>
-			<div class="relative mx-auto grid w-full max-w-screen-lg gap-y-6 px-4 py-16">
+			<div class="relative mx-auto grid w-full max-w-site gap-y-6 px-4 py-16">
 				<h1 class="text-5xl font-medium text-white">{page.hero.title}</h1>
-				<p class="max-w-[52rem] text-lg text-[#ccc]">
-					{page.hero.leadIn}
-				</p>
+				<p class="max-w-[52rem] text-lg text-[#ccc]">{page.hero.leadIn}</p>
 				<div>
-					{
-						page.hero.links.map((link) => {
-							return (
-								<NavLink
-									class="inline-flex rounded-md border border-[#ccc] px-4 py-1.5 text-[#ccc] transition hover:border-white hover:bg-white hover:text-[#444]"
-									href={link.href}
-								>
-									{link.label}
-								</NavLink>
-							);
-						})
-					}
+					{page.hero.links.map((link) => {
+						return (
+							<NavLink
+								class="inline-flex rounded-md border border-[#ccc] px-4 py-1.5 text-[#ccc] transition hover:border-white hover:bg-white hover:text-[#444]"
+								href={link.href}
+							>
+								{link.label}
+							</NavLink>
+						);
+					})}
 				</div>
 			</div>
 		</section>
 
 		<div class="grid gap-y-12 py-12">
-			{
-				page.main.sections.map((section) => {
-					switch (section.discriminant) {
-						case "cardsSection": {
-							const sectionStyles = {
-								fluid: "grid-fluid-cols-80",
-								"full-width": "",
-								"two-columns": "sm:grid-cols-2",
-								"three-columns": "sm:grid-cols-3",
-								"four-columns": "sm:grid-cols-4",
-							};
+			{page.main.sections.map((section) => {
+				switch (section.discriminant) {
+					case "cardsSection": {
+						const sectionStyles = {
+							fluid: "grid-cols-[repeat(auto-fill,minmax(20rem,1fr))]",
+							"full-width": "",
+							"two-columns": "sm:grid-cols-2",
+							"three-columns": "sm:grid-cols-3",
+							"four-columns": "sm:grid-cols-4",
+						};
 
-							return (
-								<section class="mx-auto grid w-full max-w-screen-lg gap-y-8 px-4">
-									<h2 class="border-b border-[#00000026] text-xl font-medium">
-										<span class="-my-px inline-flex border-b border-[#212529] pb-4 text-[#212529]">
-											{section.value.title}
-										</span>
-									</h2>
-									<ul class:list={["grid gap-8", sectionStyles[section.value.variant]]} role="list">
-										{section.value.cards.map(async (card) => {
-											switch (card.discriminant) {
-												case "custom": {
-													return (
-														<li>
-															<Card {...card.value} />
-														</li>
-													);
-												}
-
-												case "page": {
-													const id = card.value.reference;
-													const item = await reader().collections.pages.readOrThrow(id);
-
-													return (
-														<li>
-															<Card
-																image={item.image ?? undefined}
-																summary={item.summary || t("IndexPage.card.no-summary")}
-																title={item.title}
-																link={{ label: t("IndexPage.card.read-more"), href: `/${id}` }}
-															/>
-														</li>
-													);
-												}
-
-												default: {
-													return null;
-												}
+						return (
+							<section class="mx-auto grid w-full max-w-site gap-y-8 px-4">
+								<h2 class="border-b border-[#00000026] text-xl font-medium">
+									<span class="-my-px inline-flex border-b border-[#212529] pb-4 text-[#212529]">
+										{section.value.title}
+									</span>
+								</h2>
+								<ul class:list={["grid gap-8", sectionStyles[section.value.variant]]} role="list">
+									{section.value.cards.map(async (card) => {
+										switch (card.discriminant) {
+											case "custom": {
+												return (
+													<li>
+														<Card {...card.value} />
+													</li>
+												);
 											}
-										})}
-									</ul>
-								</section>
-							);
-						}
 
-						default: {
-							return null;
-						}
+											case "page": {
+												const id = card.value.reference;
+												const item = await reader().collections.pages.readOrThrow(id);
+
+												return (
+													<li>
+														<Card
+															image={item.image ?? undefined}
+															summary={item.summary || t("IndexPage.card.no-summary")}
+															title={item.title}
+															link={{ label: t("IndexPage.card.read-more"), href: `/${id}` }}
+														/>
+													</li>
+												);
+											}
+
+											default: {
+												return null;
+											}
+										}
+									})}
+								</ul>
+							</section>
+						);
 					}
-				})
-			}
+
+					default: {
+						return null;
+					}
+				}
+			})}
 		</div>
 	</MainContent>
 </PageLayout>

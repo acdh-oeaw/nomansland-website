@@ -22,9 +22,7 @@ const home = t("WebsiteHeader.links.home");
 ---
 
 <header class="border-b-[5px] border-brand bg-white text-[#444]">
-	<div
-		class="mx-auto flex w-full max-w-screen-lg items-center justify-between p-4 text-md font-medium"
-	>
+	<div class="mx-auto flex w-full max-w-site items-center justify-between p-4 text-md font-medium">
 		<Nav class="flex-1" label={t("WebsiteHeader.navigation-primary")}>
 			<NavMenuLink class="-ml-4 shrink-0" href="/">
 				<Image
@@ -39,72 +37,70 @@ const home = t("WebsiteHeader.links.home");
 			</NavMenuLink>
 
 			<ul class="hidden flex-1 flex-wrap items-center gap-x-2 lg:flex" role="list">
-				{
-					(navigation as Navigation).links.map((item) => {
-						switch (item.discriminant) {
-							case "link": {
-								return (
-									<li>
-										<NavMenuLink href={item.value.href}>{item.value.label}</NavMenuLink>
-									</li>
-								);
-							}
-
-							case "page": {
-								return (
-									<li>
-										<NavMenuLink href={`/${item.value.reference}`}>{item.value.label}</NavMenuLink>
-									</li>
-								);
-							}
-
-							case "menu": {
-								return (
-									<li>
-										<NavMenu>
-											<NavMenuTrigger>{item.value.label}</NavMenuTrigger>
-											<NavMenuPopover>
-												<ul role="list">
-													{item.value.links.map((link) => {
-														switch (link.discriminant) {
-															case "link": {
-																return (
-																	<li>
-																		<NavMenuItem href={link.value.href}>
-																			{link.value.label}
-																		</NavMenuItem>
-																	</li>
-																);
-															}
-
-															case "page": {
-																return (
-																	<li>
-																		<NavMenuItem href={`/${link.value.reference}`}>
-																			{link.value.label}
-																		</NavMenuItem>
-																	</li>
-																);
-															}
-
-															default: {
-																return null;
-															}
-														}
-													})}
-												</ul>
-											</NavMenuPopover>
-										</NavMenu>
-									</li>
-								);
-							}
-
-							default: {
-								return null;
-							}
+				{(navigation as Navigation).links.map((item) => {
+					switch (item.discriminant) {
+						case "link": {
+							return (
+								<li>
+									<NavMenuLink href={item.value.href}>{item.value.label}</NavMenuLink>
+								</li>
+							);
 						}
-					})
-				}
+
+						case "page": {
+							return (
+								<li>
+									<NavMenuLink href={`/${item.value.reference}`}>{item.value.label}</NavMenuLink>
+								</li>
+							);
+						}
+
+						case "menu": {
+							return (
+								<li>
+									<NavMenu>
+										<NavMenuTrigger>{item.value.label}</NavMenuTrigger>
+										<NavMenuPopover>
+											<ul role="list">
+												{item.value.links.map((link) => {
+													switch (link.discriminant) {
+														case "link": {
+															return (
+																<li>
+																	<NavMenuItem href={link.value.href}>
+																		{link.value.label}
+																	</NavMenuItem>
+																</li>
+															);
+														}
+
+														case "page": {
+															return (
+																<li>
+																	<NavMenuItem href={`/${link.value.reference}`}>
+																		{link.value.label}
+																	</NavMenuItem>
+																</li>
+															);
+														}
+
+														default: {
+															return null;
+														}
+													}
+												})}
+											</ul>
+										</NavMenuPopover>
+									</NavMenu>
+								</li>
+							);
+						}
+
+						default: {
+							return null;
+						}
+					}
+				})}
 			</ul>
 
 			<div class="ml-auto lg:hidden">

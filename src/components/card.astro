@@ -18,19 +18,17 @@ const { image, summary, link, title } = Astro.props;
 ---
 
 <article class="rounded-b-md border border-t-[5px] border-[#0000001a] border-t-brand bg-white">
-	{
-		image != null ? (
-			<NavLink aria-label={link.label} class="relative block aspect-[1.5]" href={link.href}>
-				<Image
-					alt=""
-					class="absolute inset-0 size-full object-cover"
-					sizes="670px"
-					src={getImageImport(image)}
-					widths={[670]}
-				/>
-			</NavLink>
-		) : null
-	}
+	{image != null ? (
+		<NavLink aria-label={link.label} class="relative block aspect-[1.5]" href={link.href}>
+			<Image
+				alt=""
+				class="absolute inset-0 size-full object-cover"
+				sizes="670px"
+				src={getImageImport(image)}
+				widths={[670]}
+			/>
+		</NavLink>
+	) : null}
 	<div class="grid gap-y-3 border-t border-[#00000026] p-6">
 		<header>
 			<h3 class="text-xl font-medium text-[#444]">

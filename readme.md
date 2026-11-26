@@ -7,12 +7,13 @@ website for the "nomads' manuscripts landscape" (nomansland) project. deployed a
 
 prerequisites:
 
-- [node.js 22.x](https://nodejs.org/en/download)
-- [pnpm 10.x](https://pnpm.io/installation)
+- [node.js 26.x](https://nodejs.org/en/download)
+- [pnpm 12.x](https://pnpm.io/installation)
 
 > [!TIP]
 >
-> you can use `pnpm` to install the required node.js version with `pnpm env use 22 --global`
+> you can use `pnpm` to install the required node.js version with
+> `pnpm runtime set node 26 --global`
 
 set required environment variables in `.env.local`:
 
@@ -40,14 +41,6 @@ the following variables are available:
   are "disabled", "enabled" and "public" (only validate public variables, which can be useful in a
   docker build context to avoid having to pass secrets to `docker build`), defaults to "enabled".
 
-the email service can be configured with these environment variables:
-
-- `EMAIL_CONTACT_ADDRESS` (required): email will be sent to this address.
-- `EMAIL_CONTACT_ADDRESS_BCC` (optional): email will be sent to this address.
-- `EMAIL_SMTP_SERVER` and `EMAIL_SMTP_PORT` (required): which smtp server to use.
-- `EMAIL_SMTP_USERNAME` and `EMAIL_SMTP_PASSWORD` (optional): not needed on acdh-ch infrastructure,
-  can be useful for testing with e.e. <https://ethereal.email>.
-
 when adding new environment variables, don't forget to add them to `.env.local.example` as well.
 
 install dependencies:
@@ -67,11 +60,20 @@ pnpm run dev
 > this template supports developing in containers. when opening the project in your editor, you
 > should be prompted to re-open it in a devcontainer.
 
+## tooling
+
+The site uses Astro 7. Run `pnpm run format:fix` for oxfmt, `pnpm run lint:check` for oxlint and
+Stylelint, and `pnpm run types:check` for Astro type checks. `pnpm run test:e2e` runs Playwright
+against the production build. TypeScript stays on v6, which is supported by Astro’s checker.
+Tailwind 4 uses its Vite plugin and CSS configuration in `src/styles/index.css`.
+
 ## how to edit content
 
-use the admin ui at when developing locally <http://localhost:3000/admin> (this will save changes to
-the filesystem), or at <https://amc.acdh-ch-dev.oeaw.ac.at/admin> (this will commit changes to the
-github repository).
+run `pnpm run dev` and open <http://localhost:3000/admin> or <http://localhost:3000/keystatic>.
+Keystatic saves changes to the local filesystem. Commit and push the changed content and assets to
+publish them. The editor and its API are available only during local development and are excluded
+from production builds. Local development always uses root-relative routes, regardless of the
+production `PUBLIC_APP_BASE_PATH`.
 
 ## how to deploy
 
@@ -90,12 +92,6 @@ github repository).
 - ensure required build args (prefixed with `PUBLIC_`) are referenced in both the
   [`Dockerfile`](./Dockerfile), as well as the [validation](./.github/workflows/validate.yml) and
   [deployment](./.github/workflows/build-deploy.yml) pipelines, and set as github variables.
-- ensure required runtime environment variables are referenced in the
-  [validation](./.github/workflows/validate.yml) and
-  [deployment](./.github/workflows/build-deploy.yml) pipelines, and set as github secrets. github
-  secrets need to be prefixed with `K8S_SECRET_` to be automatically copied to the runtime
-  environment. in case you need secrets in the docker build context, you can
-  [mount a secret in the Dockerfile](https://docs.docker.com/build/building/secrets/).
 - ensure both the github repository, as well as the
   [package registry](https://github.com/orgs/acdh-oeaw/packages/container/my-app/settings) is set to
   public.
@@ -106,9 +102,19 @@ if the validation pipeline passes.
 you can reference the [template repository](https://github.com/acdh-oeaw/template-website-astro) for
 a working setup.
 
-> [!NOTE]
->
-> by default, this will deploy a `node` server, which will serve pre-rendered pages, assets, and api
-> routes. if you prefer a truly static build, which uses `caddy` as a fileserver, use the
-> `Dockerfile.static` instead, and remove `output: "hybrid"` from `astro.config.ts`. you will also
-> need to change the `generate:search-index` script to `pagefind --site ./dist/`.
+production builds generate static files in `dist/`, including the Pagefind search index. The
+`Dockerfile` serves these files with Caddy on port 3000 as an unprivileged user. Node.js and
+Keystatic are not part of the runtime image. All application configuration is supplied at build
+time; no Keystatic credentials are required.
+
+The build prunes unreferenced images from generated `assets/content/` and `_astro/` files before
+packaging the site. Linked originals, downloads, and all source files are preserved. Run `pnpm test`
+for the asset-pruning regression test.
+
+`PUBLIC_APP_BASE_PATH` is baked into the build and Caddy configuration. Use the same value when
+building the image and deploying it behind a path prefix (without a trailing slash). Caddy serves
+`404.html` for missing pages and caches fingerprinted Astro assets for one year.
+
+GitHub Actions restores the Astro image cache before the Docker build and exports the updated cache
+afterward. The `astro-cache` Docker stage contains only this cache, not installed dependencies or
+generated site files.

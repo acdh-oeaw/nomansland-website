@@ -5,7 +5,6 @@ import { DownloadIcon, ImageIcon, LinkIcon, ListIcon } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import { createAssetPaths } from "@/config/content.config";
-import { env } from "@/config/env.config";
 
 function createComponents(
 	assetPath: `/${string}/`,
@@ -96,24 +95,7 @@ export default config({
 			Settings: ["metadata"],
 		},
 	},
-	storage:
-		/**
-		 * @see https://keystatic.com/docs/github-mode
-		 */
-		env.PUBLIC_KEYSTATIC_MODE === "github" &&
-		env.PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER &&
-		env.PUBLIC_KEYSTATIC_GITHUB_REPO_NAME
-			? {
-					kind: "github",
-					repo: {
-						owner: env.PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER,
-						name: env.PUBLIC_KEYSTATIC_GITHUB_REPO_NAME,
-					},
-					branchPrefix: "content/",
-				}
-			: {
-					kind: "local",
-				},
+	storage: { kind: "local" },
 	collections: {
 		pages: collection({
 			label: "Pages",

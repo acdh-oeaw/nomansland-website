@@ -1,0 +1,30 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["typescript", "import", "unicorn", "react", "jsx-a11y"],
+	"options": {
+		"typeAware": true
+	},
+	"env": {
+		"builtin": true,
+		"es2026": true,
+		"browser": true,
+		"node": true
+	},
+	"ignorePatterns": ["content/**", "public/**"],
+	"rules": {
+		"typescript/no-floating-promises": "error",
+		"typescript/no-misused-promises": "error",
+		"typescript/await-thenable": "error",
+		"import/no-duplicates": "error"
+	},
+	"overrides": [
+		{
+			"files": ["**/*.astro"],
+			"rules": {
+				"typescript/no-floating-promises": "off",
+				"typescript/no-misused-promises": "off",
+				"typescript/await-thenable": "off"
+			}
+		}
+	]
+}
