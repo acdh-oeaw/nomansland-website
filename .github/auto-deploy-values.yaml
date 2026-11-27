@@ -24,7 +24,7 @@ ingress:
   tls:
     enabled: false
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: kube-system-compress@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-redirect-https@kubernetescrd,kube-system-compress@kubernetescrd
 livenessProbe:
   path: "/health"
   initialDelaySeconds: 15
